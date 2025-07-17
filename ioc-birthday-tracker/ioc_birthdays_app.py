@@ -56,19 +56,35 @@ if not todays_birthdays.empty:
 else:
     st.markdown("🕊 오늘은 생일인 IOC 위원이 없습니다.")
 
-# -------------------- 다가오는 생일 --------------------
-st.markdown("### 🔜 다가오는 생일 (15일 이내)")
+# -------------------- 이번달 & 다음달 생일 --------------------
+this_month = today.month
+next_month = 1 if today.month == 12 else today.month + 1
 
-next_15_days = [(today + timedelta(days=i)).strftime("%m-%d") for i in range(1, 16)]
-df["mmdd"] = df["born_dt"].dt.strftime("%m-%d")
-upcoming_birthdays = df[df["mmdd"].isin(next_15_days)]
+df["month"] = df["born_dt"].dt.month
 
-with st.expander("🎈 다가오는 생일 보기"):
-    if not upcoming_birthdays.empty:
-        for _, row in upcoming_birthdays.sort_values("mmdd").iterrows():
+this_month_birthdays = df[df["month"] == this_month].sort_values("born_dt")
+next_month_birthdays = df[df["month"] == next_month].sort_values("born_dt")
+
+# 이번 달 생일
+st.markdown("### 📅 이번 달 생일자")
+
+with st.expander(f"🎈 {this_month}월 생일인 위원 보기"):
+    if not this_month_birthdays.empty:
+        for _, row in this_month_birthdays.iterrows():
             display_card(row, image_size=80)
     else:
-        st.write("향후 15일 이내 생일인 IOC 위원이 없습니다.")
+        st.write(f"{this_month}월에 생일인 위원이 없습니다.")
+
+# 다음 달 생일
+st.markdown("### 📅 다음 달 생일자")
+
+with st.expander(f"🎈 {next_month}월 생일인 위원 보기"):
+    if not next_month_birthdays.empty:
+        for _, row in next_month_birthdays.iterrows():
+            display_card(row, image_size=80)
+    else:
+        st.write(f"{next_month}월에 생일인 위원이 없습니다.")
+
 
 # -------------------- 전체 명단 --------------------
 
