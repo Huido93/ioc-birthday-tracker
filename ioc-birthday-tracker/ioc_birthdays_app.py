@@ -20,7 +20,12 @@ today_day = today.day
 today_month = today.month
 
 # Header
-st.markdown("## 🎂 IOC위원 생일 알리미")
+st.markdown("""
+<h2 style='display: flex; align-items: center; gap: 10px;'>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Olympic_rings_without_rims.svg/32px-Olympic_rings_without_rims.svg.png" width="32">
+    IOC위원 생일 알리미
+</h2>
+""", unsafe_allow_html=True)
 st.markdown(f"오늘 날짜: {today.strftime('%Y-%m-%d')}")
 
 st.markdown("---")
