@@ -26,6 +26,8 @@ st.markdown("---")
 
 # -------------------- 오늘 생일 --------------------
 st.markdown("### 🎉 오늘 생일인 위원")
+st.markdown(f"오늘 날짜: {today.strftime('%Y-%m-%d')}")
+
 
 todays_birthdays = df[
     (df["born_dt"].dt.day == today_day) & (df["born_dt"].dt.month == today_month)
