@@ -3,7 +3,7 @@ import pandas as pd
 from datetime import datetime
 
 # Load CSV
-df = pd.read_csv("ioc_members_detailed.csv")
+df = pd.read_csv("ioc-birthday-tracker/ioc_members_detailed.csv")
 
 # Convert born column to datetime
 df["born_dt"] = pd.to_datetime(df["born"], format="%d-%b-%y", errors="coerce")
