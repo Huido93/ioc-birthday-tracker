@@ -82,10 +82,6 @@ display_df.rename(columns={
     "profile_url": "Profile URL"
 }, inplace=True)
 
-# 검색 필터
-search_query = st.text_input("🔎 이름으로 검색")
-if search_query:
-    display_df = display_df[display_df["이름"].str.contains(search_query, case=False, na=False)]
 
 # 🔗 링크 버튼 추가
 display_df["🔗 Profile"] = display_df["Profile URL"].apply(
@@ -99,5 +95,10 @@ display_df.drop(columns=["born_sort", "Profile URL"], inplace=True)
 st.markdown("### 📋 전체 IOC 위원 명단")
 st.caption("📅 최신화 날짜: 2025년 7월")
 st.caption("💡 열 제목을 클릭해 정렬하거나, 이름으로 검색할 수 있어요.")
+
+# 검색 필터
+search_query = st.text_input("🔎 이름으로 검색")
+if search_query:
+    display_df = display_df[display_df["이름"].str.contains(search_query, case=False, na=False)]
 
 st.dataframe(display_df, use_container_width=True, height=500)
