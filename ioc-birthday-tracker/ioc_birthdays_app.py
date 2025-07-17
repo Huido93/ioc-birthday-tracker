@@ -61,9 +61,10 @@ this_month = today.month
 next_month = 1 if today.month == 12 else today.month + 1
 
 df["month"] = df["born_dt"].dt.month
+df["day"] = df["born_dt"].dt.day  # 🔑 추가: 날짜 기준 정렬용
 
-this_month_birthdays = df[df["month"] == this_month].sort_values("born_dt")
-next_month_birthdays = df[df["month"] == next_month].sort_values("born_dt")
+this_month_birthdays = df[df["month"] == this_month].sort_values("day")
+next_month_birthdays = df[df["month"] == next_month].sort_values("day")
 
 # 이번 달 생일
 st.markdown("### 📅 이번 달 생일자")
@@ -84,6 +85,7 @@ with st.expander(f"🎈 {next_month}월 생일인 위원 보기"):
             display_card(row, image_size=80)
     else:
         st.write(f"{next_month}월에 생일인 위원이 없습니다.")
+
 
 
 # -------------------- 전체 명단 --------------------
